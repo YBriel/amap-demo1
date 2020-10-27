@@ -158,11 +158,12 @@
     },
     methods: {
       initSearch () {
-        let vm = this
-        let map = this.amapManager.getMap()
+        let vm = this;
+        let map = this.amapManager.getMap();
         AMapUI.loadUI(['misc/PoiPicker'], function (PoiPicker) {
           var poiPicker = new PoiPicker({
             input: 'search',
+            searchByKeyword:'',
             placeSearchOptions: {
               map: map,
               pageSize: 10
@@ -173,10 +174,12 @@
           vm.poiPicker = poiPicker
           // 监听poi选中信息
           poiPicker.on('poiPicked', function (poiResult) {
-            // console.log(poiResult)
+             console.log("监听poi选中信息")
+             console.log(poiResult)
             let source = poiResult.source
             let poi = poiResult.item
             if (source !== 'search') {
+              console.log("source....")
               poiPicker.searchByKeyword(poi.name)
             } else {
               poiPicker.clearSearchResults()
@@ -195,6 +198,9 @@
         })
       },
       searchByHand () {
+        console.log("点击了搜索按钮");
+        console.log(this.searchKey);
+        console.log("点击了搜索按钮1");
         if (this.searchKey !== '') {
           this.poiPicker.searchByKeyword(this.searchKey)
         }
