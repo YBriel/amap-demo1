@@ -1,5 +1,5 @@
 <template lang="html">
-    <div style="width:100%;height:800px;">
+    <div style="width:100%;height:600px;">
         <div class="container">
             <div class="search-box">
                 <input
@@ -26,8 +26,17 @@
                      :events="events"
             >
                 <!-- 标记 -->
-             <!--   <el-amap-marker v-for="(marker, index) in markers" :position="marker" :key="index"></el-amap-marker>-->
+
+                <el-amap-marker v-for="(marker, index) in markers" :position="marker.position" :key="index" :events="marker.events" :visible="marker.visible" :draggable="marker.draggable" :vid="index"></el-amap-marker>
+               <!-- <el-amap-marker v-for="(marker, index) in markers" :position="markers[index].position" :key="index" :events="marker.events" :visible="marker.visible" :draggable="marker.draggable" :vid="index"></el-amap-marker>-->
             </el-amap>
+        </div>
+        <div class="toolbar">
+            <!--      <button type="button" name="button" v-on:click="toggleVisible">toggle first marker</button>
+                  <button type="button" name="button" v-on:click="changePosition">change position</button>
+                  <button type="button" name="button" v-on:click="chnageDraggle">change draggle</button>-->
+            <button type="button" name="button" v-on:click="addMarker">add marker</button>
+            <button type="button" name="button" v-on:click="removeMarker">remove marker</button>
         </div>
     </div>
 </template>
@@ -42,7 +51,9 @@
                 address: null,
                 searchKey: '',
                 amapManager,
-                markers: [],
+                markers: [
+
+                ],
                 searchOption: {
                     city: '全国',
                     citylimit: true
@@ -109,18 +120,23 @@
                                 console.log("哈哈哈");
                                 o.getCurrentPosition((status, result) => {
                                     console.log("哈哈哈5");
+                                    console.log(result)
                                     if (result && result.position) {
                                         // 设置经度
-                                        self.lng = result.position.lng
+                                        self.lng = result.position.lng;
                                         // 设置维度
-                                        self.lat = result.position.lat
+                                        self.lat = result.position.lat;
                                         // 设置坐标
-                                        self.center = [self.lng, self.lat]
-                                        self.markers.push([self.lng, self.lat])
+                                        self.center = [self.lng, self.lat];
+                                       // self.markers.push([self.lng, self.lat]);
+                                        let marker = {
+                                            position: [self.lng,  self.lat]
+                                        };
+                                        self.markers.push(marker);
                                         // load
-                                        self.loaded = true
+                                      /*  self.loaded = true;
                                         // 页面渲染好后
-                                        self.$nextTick()
+                                        self.$nextTick()*/
                                     }
                                 })
                             }
@@ -175,7 +191,7 @@
             }
         },
         methods: {
- /*           initSearch() {
+            initSearch() {
                 console.log("哈哈哈10");
                 let vm = this;
                 let map = this.amapManager.getMap()
@@ -215,13 +231,39 @@
                         }
                     })
                 })
-            },*/
+            },
             searchByHand() {
                 if (this.searchKey !== '') {
                     console.log("哈哈哈14");
                     this.poiPicker.searchByKeyword(this.searchKey)
                 }
+            },
+            addMarker() {
+                console.log("点击了添加maker");
+                console.log(JSON.stringify(this.markers));
+
+                let marker = {
+                    position: [115.84179 + (Math.random() - 0.5) * 0.02, 28.74188+ (Math.random() - 0.5) * 0.02]
+                };
+                this.markers.push(marker);
+                console.log(JSON.stringify(marker));
+
+
+                console.log(JSON.stringify(this.markers));
+            },
+            removeMarker() {
+                if (!this.markers.length) return;
+                this.markers.splice(this.markers.length - 1, 1);
             }
+        },
+        beforeMount() {
+            let marker = {
+                position: [315.84179 + (Math.random() - 0.5) * 0.02, 38.74188+ (Math.random() - 0.5) * 0.02]
+            };
+            this.markers.push(marker);
+            console.log("滚滚滚")
+            console.log(this.markers)
+
         }
     }
 </script>
