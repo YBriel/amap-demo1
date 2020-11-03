@@ -26,7 +26,6 @@
                      :events="events"
             >
                 <!-- 标记 -->
-                <el-amap-marker :position="mark.position" ></el-amap-marker>
 
                 <el-amap-marker v-for="(marker, index) in markers" :position="marker.position" :key="index" :events="marker.events" :visible="marker.visible" :draggable="marker.draggable" :vid="index"></el-amap-marker>
                 <!-- <el-amap-marker v-for="(marker, index) in markers" :position="markers[index].position" :key="index" :events="marker.events" :visible="marker.visible" :draggable="marker.draggable" :vid="index"></el-amap-marker>-->
@@ -52,9 +51,6 @@
                 address: null,
                 searchKey: '',
                 amapManager,
-                mark: {
-                    position: [115.84179 , 28.74188]
-                },
                 markers: [
 
                 ],
@@ -69,26 +65,21 @@
                 loaded: false,
                 events: {
                     init() {
-                         console.log("哈哈哈1");
+                        /* console.log("哈哈哈1");
                          lazyAMapApiLoaderInstance.load().then(() => {
                              self.initSearch()
-                         })
+                         })*/
                     },
                     // 点击获取地址的数据
                     click(e) {
                         console.log("哈哈哈2");
                         // console.log(e)
-                        self.marker = [];
-                        let { lng, lat } = e.lnglat;
-                        self.lng = lng;
-                        self.lat = lat;
-                        self.center = [lng, lat];
-                        let marker = {
-                            position: [self.lng,  self.lat]
-                        };
-                        self.mark.position=[self.lng,  self.lat];
-
-                        console.log("selfMark是"+self.mark);
+                        self.markers = []
+                        let { lng, lat } = e.lnglat
+                        self.lng = lng
+                        self.lat = lat
+                        self.center = [lng, lat]
+                        self.markers.push([lng, lat])
                         // 这里通过高德 SDK 完成。
                         let geocoder = new AMap.Geocoder({
                             radius: 1000,
@@ -112,10 +103,9 @@
                         pName: 'Geocoder',
                         events: {
 
-                             init (o) {
-                                 console.log("Geocoder")
+                            /* init (o) {
                                  console.log(o.getAddress())
-                             }
+                             }*/
                         }
                     },
                     {
@@ -130,7 +120,7 @@
                                 console.log("哈哈哈");
                                 o.getCurrentPosition((status, result) => {
                                     console.log("哈哈哈5");
-                                    console.log(result);
+                                    console.log(result)
                                     if (result && result.position) {
                                         // 设置经度
                                         self.lng = result.position.lng;
