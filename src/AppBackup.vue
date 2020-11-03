@@ -28,10 +28,13 @@
                 <!-- 标记 -->
                 <el-amap-marker :position="mark.position" icon="./leaf.ico"></el-amap-marker>
 
-                <el-amap-marker v-for="(marker, index) in markers" :position="marker.position" :key="index" :events="marker.events"></el-amap-marker>
-                <el-amap-info-window v-if="window" :position="window.position" :visible="window.visible" :content="window.content"></el-amap-info-window>
-
+                <el-amap-marker v-for="(marker, index) in markers" icon="./leaf.ico" :position="marker.position" :key="index" :visible="marker.visible" :draggable="marker.draggable" :vid="index"></el-amap-marker>
                 <!-- <el-amap-marker v-for="(marker, index) in markers" :position="markers[index].position" :key="index" :events="marker.events" :visible="marker.visible" :draggable="marker.draggable" :vid="index"></el-amap-marker>-->
+                <el-amap-info-window
+                        :position="mark.position"
+                        :visible="true"
+                        content="sdfasdfs"
+                ></el-amap-info-window>
             </el-amap>
         </div>
         <div class="toolbar">
@@ -45,8 +48,7 @@
 </template>
 
 <script>
-    import {AMapManager, lazyAMapApiLoaderInstance} from 'vue-amap'
-
+    import { AMapManager, lazyAMapApiLoaderInstance } from 'vue-amap'
     let amapManager = new AMapManager()
 
     export default {
@@ -57,11 +59,11 @@
                 searchKey: '',
                 amapManager,
                 mark: {
-                    position: [115.84179, 28.74188]
+                    position: [115.84179 , 28.74188]
                 },
-                markers: [],
-                windows: [],
-                window: '',
+                markers: [
+
+                ],
                 searchOption: {
                     city: '全国',
                     citylimit: true
@@ -73,32 +75,32 @@
                 loaded: false,
                 events: {
                     init() {
-                        console.log("哈哈哈1");
-                        lazyAMapApiLoaderInstance.load().then(() => {
-                            self.initSearch()
-                        })
+                         console.log("哈哈哈1");
+                         lazyAMapApiLoaderInstance.load().then(() => {
+                             self.initSearch()
+                         })
                     },
                     // 点击获取地址的数据
                     click(e) {
                         console.log("哈哈哈2");
                         // console.log(e)
                         self.marker = [];
-                        let {lng, lat} = e.lnglat;
+                        let { lng, lat } = e.lnglat;
                         self.lng = lng;
                         self.lat = lat;
                         self.center = [lng, lat];
                         let marker = {
-                            position: [self.lng, self.lat]
+                            position: [self.lng,  self.lat]
                         };
-                        self.mark.position = [self.lng, self.lat];
+                        self.mark.position=[self.lng,  self.lat];
 
-                        console.log("selfMark是" + self.mark);
+                        console.log("selfMark是"+self.mark);
                         // 这里通过高德 SDK 完成。
                         let geocoder = new AMap.Geocoder({
                             radius: 1000,
                             extensions: 'all'
                         });
-                        geocoder.getAddress([lng, lat], function (status, result) {
+                        geocoder.getAddress([lng, lat], function(status, result) {
                             if (status === 'complete' && result.info === 'OK') {
                                 if (result && result.regeocode) {
                                     console.log(result.regeocode.formattedAddress)
@@ -116,10 +118,10 @@
                         pName: 'Geocoder',
                         events: {
 
-                            init(o) {
-                                console.log("Geocoder")
-                                console.log(o.getAddress())
-                            }
+                             init (o) {
+                                 console.log("Geocoder")
+                                 console.log(o.getAddress())
+                             }
                         }
                     },
                     {
@@ -144,10 +146,9 @@
                                         self.center = [self.lng, self.lat];
                                         // self.markers.push([self.lng, self.lat]);
                                         let marker = {
-                                            position: [self.lng, self.lat]
+                                            position: [self.lng,  self.lat]
                                         };
                                         self.markers.push(marker);
-
                                         // load
                                         /*  self.loaded = true;
                                           // 页面渲染好后
@@ -210,7 +211,7 @@
                 console.log("哈哈哈10");
                 let vm = this;
                 let map = this.amapManager.getMap()
-                AMapUI.loadUI(['misc/PoiPicker'], function (PoiPicker) {
+                AMapUI.loadUI(['misc/PoiPicker'], function(PoiPicker) {
                     var poiPicker = new PoiPicker({
                         input: 'search',
                         placeSearchOptions: {
@@ -222,7 +223,7 @@
                     })
                     vm.poiPicker = poiPicker
                     // 监听poi选中信息
-                    poiPicker.on('poiPicked', function (poiResult) {
+                    poiPicker.on('poiPicked', function(poiResult) {
                         // console.log(poiResult)
                         console.log("哈哈哈11");
                         let source = poiResult.source
@@ -254,76 +255,29 @@
                 }
             },
             addMarker() {
-                this.transferMakers();
                 console.log("点击了添加maker");
                 console.log(JSON.stringify(this.markers));
+
                 let marker = {
-                    position: [115.84179 + (Math.random() - 0.5) * 0.02, 28.74188 + (Math.random() - 0.5) * 0.02],
-                    events: {
-                        click() {
-                            console.log("hhh")
-                            /*         self.windows.forEach(window => {
-                                         window.visible = false;
-                                     });*/
-                            self.$nextTick(() => {
-                                self.window.visible = true;
-                            });
-                        }
-                    }
+                    position: [115.84179 + (Math.random() - 0.5) * 0.02, 28.74188+ (Math.random() - 0.5) * 0.02]
                 };
                 this.markers.push(marker);
                 console.log(JSON.stringify(marker));
                 console.log(JSON.stringify(this.markers));
-
             },
             removeMarker() {
                 if (!this.markers.length) return;
                 this.markers.splice(this.markers.length - 1, 1);
             },
 
-            picClick(position) {
+            picClick(position){
                 console.log("点击了图标事件")
                 console.log(position)
-            },
-            transferMakers() {
-                let markers = [];
-                let windows = [];
-
-                let num = 10;
-                let self = this;
-
-                for (let i = 0; i < num; i++) {
-                    markers.push({
-                        position: [115.84179, 28.74188+ i * 0.001],
-                        events: {
-                            click() {
-                                console.log("点击");
-                                self.windows.forEach(window => {
-                                    window.visible = false;
-                                });
-
-                                self.window = self.windows[i];
-                                self.$nextTick(() => {
-                                    self.window.visible = true;
-                                });
-                            }
-                        }
-                    });
-
-                    windows.push({
-                        position: [115.84179, 28.74188+ i * 0.001],
-                        content: `<div class="prompt">${i}</div>`,
-                        visible: false
-                    });
-                }
-
-                this.markers = markers;
-                this.windows = windows;
             }
         },
         beforeMount() {
             let marker = {
-                position: [315.84179 + (Math.random() - 0.5) * 0.02, 38.74188 + (Math.random() - 0.5) * 0.02]
+                position: [315.84179 + (Math.random() - 0.5) * 0.02, 38.74188+ (Math.random() - 0.5) * 0.02]
             };
             this.markers.push(marker);
             console.log("滚滚滚")
@@ -343,7 +297,6 @@
         transform: translate3d(-50%, -50%, 0);
         border: 1px solid #999;
     }
-
     .search-box {
         position: absolute;
         z-index: 5;
@@ -352,7 +305,6 @@
         top: 10px;
         height: 30px;
     }
-
     .search-box input {
         float: left;
         width: 80%;
@@ -361,7 +313,6 @@
         padding: 0 8px;
         outline: none;
     }
-
     .search-box button {
         float: left;
         width: 20%;
@@ -371,7 +322,6 @@
         color: #fff;
         outline: none;
     }
-
     .tip-box {
         width: 100%;
         max-height: 260px;
