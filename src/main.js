@@ -5,7 +5,7 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter);
 
 import appTrack from './AppTrack.vue';
-import goodList from '../src/components/GoodList.vue'
+import goodList from "./components/GoodList.vue"
 
 
 Vue.config.productionTip = false;
@@ -21,18 +21,30 @@ VueAMap.initAMapApiLoader({
 
 
 const router = new VueRouter({
-  routers: [
+  routes: [
     //account goodslist
-    {path:'',redirect:"goodList"},
+    // {path:'',redirect:"goodList"},
     {path: '/track', component: appTrack},
     {path: '/goodList', component: goodList},
 
   ]
 
 });
+/*router.beforeEach((to, from, next) => {
+});*/
 
+router.beforeEach((to, from, next) => {
+  console.log(to, from)
+  next();
+});
 var vm=new Vue({
   el: '#app',
+  // render:(h)=>{h(app)},
   render: h => h(app),
-  router
+  router,
+  // component:{
+  //   app
+  // }
 });
+
+
