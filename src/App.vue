@@ -10,7 +10,7 @@
 <script>
 export  default {
     mounted(){
-        this.$router.push({ path: '/GOOGList' })
+        this.$router.push({ path: 'temp' })
     }
 }
 </script>

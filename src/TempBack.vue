@@ -42,11 +42,11 @@
 </template>
 
 <script>
-    import {AMapManager, lazyAMapApiLoaderInstance} from 'vue-amap'
-    let amapManager = new AMapManager();
+    import { AMapManager, lazyAMapApiLoaderInstance } from 'vue-amap'
+    let amapManager = new AMapManager()
     export default {
         data() {
-            let self = this;
+            let self = this
             return {
                 address: null,
                 searchKey: '',
@@ -65,37 +65,32 @@
                 loaded: false,
                 events: {
                     init() {
-                         console.log("哈哈哈1");
+                        /* console.log("哈哈哈1");
                          lazyAMapApiLoaderInstance.load().then(() => {
                              self.initSearch()
-                         })
+                         })*/
                     },
                     // 点击获取地址的数据
                     click(e) {
                         console.log("哈哈哈2");
                         // console.log(e)
-                        self.markers = [];
-                        let { lng, lat } = e.lnglat;
-                        self.lng = lng;
-                        self.lat = lat;
-                        self.center = [lng, lat];
-                        let marker = {
-                            position: [self.lng,  self.lat]
-                        };
-                        self.markers.push(marker);
+                        self.markers = []
+                        let { lng, lat } = e.lnglat
+                        self.lng = lng
+                        self.lat = lat
+                        self.center = [lng, lat]
+                        self.markers.push([lng, lat])
                         // 这里通过高德 SDK 完成。
-
                         let geocoder = new AMap.Geocoder({
                             radius: 1000,
                             extensions: 'all'
                         });
-
                         geocoder.getAddress([lng, lat], function(status, result) {
                             if (status === 'complete' && result.info === 'OK') {
                                 if (result && result.regeocode) {
-                                    console.log(result.regeocode.formattedAddress);
-                                    self.address = result.regeocode.formattedAddress;
-                                    self.searchKey = result.regeocode.formattedAddress;
+                                    console.log(result.regeocode.formattedAddress)
+                                    self.address = result.regeocode.formattedAddress
+                                    self.searchKey = result.regeocode.formattedAddress
                                     self.$nextTick()
                                 }
                             }
@@ -108,9 +103,9 @@
                         pName: 'Geocoder',
                         events: {
 
-                             init (o) {
+                            /* init (o) {
                                  console.log(o.getAddress())
-                             }
+                             }*/
                         }
                     },
                     {
@@ -139,9 +134,9 @@
                                         };
                                         self.markers.push(marker);
                                         // load
-                                          self.loaded = true;
+                                        /*  self.loaded = true;
                                           // 页面渲染好后
-                                          self.$nextTick()
+                                          self.$nextTick()*/
                                     }
                                 })
                             }
@@ -199,7 +194,7 @@
             initSearch() {
                 console.log("哈哈哈10");
                 let vm = this;
-                let map = this.amapManager.getMap();
+                let map = this.amapManager.getMap()
                 AMapUI.loadUI(['misc/PoiPicker'], function(PoiPicker) {
                     var poiPicker = new PoiPicker({
                         input: 'search',
@@ -208,8 +203,7 @@
                             pageSize: 10
                         },
                         suggestContainer: 'searchTip',
-                        searchResultsContainer: 'searchTip',
-                        searchByKeyword:''
+                        searchResultsContainer: 'searchTip'
                     });
                     vm.poiPicker = poiPicker;
                     // 监听poi选中信息
@@ -223,16 +217,16 @@
                             poiPicker.searchByKeyword(poi.name)
                         } else {
                             console.log("哈哈哈3");
-                            poiPicker.clearSearchResults();
-                            vm.markers = [];
-                            let lng = poi.location.lng;
-                            let lat = poi.location.lat;
-                            let address = poi.cityname + poi.adname + poi.name;
-                            vm.center = [lng, lat];
-                            vm.markers.push([lng, lat]);
-                            vm.lng = lng;
-                            vm.lat = lat;
-                            vm.address = address;
+                            poiPicker.clearSearchResults()
+                            vm.markers = []
+                            let lng = poi.location.lng
+                            let lat = poi.location.lat
+                            let address = poi.cityname + poi.adname + poi.name
+                            vm.center = [lng, lat]
+                            vm.markers.push([lng, lat])
+                            vm.lng = lng
+                            vm.lat = lat
+                            vm.address = address
                             vm.searchKey = address
                         }
                     })

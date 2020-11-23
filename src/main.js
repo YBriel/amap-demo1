@@ -6,6 +6,12 @@ Vue.use(VueRouter);
 
 import appTrack from './AppTrack.vue';
 import goodList from "./components/GoodList.vue"
+import ok from "./AppOk"
+//import click from "./ClickEvent"
+import app3 from "./App3"
+import app2 from "./App2"
+import temp from "./Temp"
+import backup from "./AppBackup"
 
 
 Vue.config.productionTip = false;
@@ -26,6 +32,12 @@ const router = new VueRouter({
     // {path:'',redirect:"goodList"},
     {path: '/track', component: appTrack},
     {path: '/goodList', component: goodList},
+   // {path: '/click', component: click},
+    {path: '/ok', component: ok},
+    {path: '/app3', component: app3},
+    {path: '/app2', component: app2},
+    {path: '/temp', component: temp},
+    {path: '/backup', component: backup},
 
   ]
 
