@@ -42,17 +42,7 @@
 </template>
 
 <script>
-    import Vue from 'vue';
-    import VueAMap from "vue-amap";
-
-    Vue.use(VueAMap);
     import {AMapManager, lazyAMapApiLoaderInstance} from 'vue-amap'
-    VueAMap.initAMapApiLoader({
-        key: 'd6a13046ccbbe124fda43844ffd7f21f', //, 'AMap.Geolocation'
-        plugin: ['AMap.Autocomplete', 'AMap.PlaceSearch', 'AMap.Geolocation', 'AMap.Geocoder', 'AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.PolyEditor', 'AMap.CircleEditor'],
-        v: '1.4.4',
-        uiVersion: '1.0.11' // 版本号
-    });
     let amapManager = new AMapManager();
     export default {
         data() {
