@@ -12,7 +12,9 @@ import app3 from "./App3"
 import app2 from "./App2"
 import temp from "./Temp"
 import backup from "./AppBackup"
-
+import mp4 from "./PlayMp4"
+import vueMiniPlayer from 'vue-mini-player'
+Vue.use(vueMiniPlayer)
 
 Vue.config.productionTip = false;
 //main.js引入
@@ -38,6 +40,7 @@ const router = new VueRouter({
     {path: '/app2', component: app2},
     {path: '/temp', component: temp},
     {path: '/backup', component: backup},
+    {path: '/mp4', component: mp4}
 
   ]
 

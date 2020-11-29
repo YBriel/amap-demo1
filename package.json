@@ -14,6 +14,7 @@
     "sass-loader": "^10.1.0",
     "vue": "^2.6.11",
     "vue-amap": "^0.5.10",
+    "vue-mini-player": "^0.1.5",
     "vue-router": "^3.4.9"
   },
   "devDependencies": {
