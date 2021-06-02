@@ -153,9 +153,9 @@
                                         self.markers.push(marker);
 
                                         // load
-                                        /*  self.loaded = true;
+                                          self.loaded = true;
                                           // 页面渲染好后
-                                          self.$nextTick()*/
+                                          self.$nextTick()
                                     }
                                 })
                             }

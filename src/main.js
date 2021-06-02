@@ -11,12 +11,18 @@ import ok from "./AppOk"
 import app3 from "./App3"
 import app2 from "./App2"
 import temp from "./Temp"
+import leafDemo from "@/components/LeafDemo";
 import backup from "./AppBackup"
-
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css';
+import VueResource from 'vue-resource'
 
 Vue.config.productionTip = false;
 //main.js引入
 Vue.use(VueAMap);
+Vue.use(ElementUI);
+Vue.use(VueResource);
+
 
 VueAMap.initAMapApiLoader({
   key: 'd6a13046ccbbe124fda43844ffd7f21f', //, 'AMap.Geolocation'
@@ -38,6 +44,7 @@ const router = new VueRouter({
     {path: '/app2', component: app2},
     {path: '/temp', component: temp},
     {path: '/backup', component: backup},
+    {path: '/leafDemo', component: leafDemo},
 
   ]
 
