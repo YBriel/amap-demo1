@@ -5,6 +5,7 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter);
 
 import appTrack from './AppTrack.vue';
+import appTrackBackup from './AppTrackBackup.vue';
 import goodList from "./components/GoodList.vue"
 import ok from "./AppOk"
 //import click from "./ClickEvent"
@@ -33,6 +34,7 @@ const router = new VueRouter({
     //account goodslist
     // {path:'',redirect:"goodList"},
     {path: '/track', component: appTrack},
+    {path: '/appTrackBackup', component: appTrackBackup},
     {path: '/goodList', component: goodList},
    // {path: '/click', component: click},
     {path: '/ok', component: ok},
@@ -52,6 +54,11 @@ router.beforeEach((to, from, next) => {
   console.log(to, from)
   next();
 });
+
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+Vue.use(ElementUI);
+
 var vm=new Vue({
   el: '#app',
   // render:(h)=>{h(app)},

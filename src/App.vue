@@ -1,7 +1,6 @@
 <template>
     <div >
         <h1>哈哈哈</h1>
-
         <router-view></router-view>
     </div>
 
@@ -10,7 +9,7 @@
 <script>
 export  default {
     mounted(){
-        this.$router.push({ path: 'temp' })
+        this.$router.push({ path: 'track' })
     }
 }
 </script>
