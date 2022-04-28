@@ -6,6 +6,7 @@ Vue.use(VueRouter);
 
 import appTrack from './AppTrack.vue';
 import appTrackBackup from './AppTrackBackup.vue';
+import appTrackStation from './AppTrackStation.vue';
 import goodList from "./components/GoodList.vue"
 import ok from "./AppOk"
 //import click from "./ClickEvent"
@@ -35,6 +36,7 @@ const router = new VueRouter({
     // {path:'',redirect:"goodList"},
     {path: '/track', component: appTrack},
     {path: '/appTrackBackup', component: appTrackBackup},
+    {path: '/appTrackStation', component: appTrackStation},
     {path: '/goodList', component: goodList},
    // {path: '/click', component: click},
     {path: '/ok', component: ok},
