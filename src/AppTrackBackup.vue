@@ -93,7 +93,7 @@ export default {
           // 创建巡航器
           var pathNavigator = pathSimplifierIns.createPathNavigator(0, {
             loop: true, // 是否循环
-            speed: 1500 // 速度(km/h)
+            speed: 2000 // 速度(km/h)
           })
           pathNavigator.start()
         })

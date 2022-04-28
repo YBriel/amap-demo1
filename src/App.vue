@@ -9,7 +9,7 @@
 <script>
 export  default {
     mounted(){
-        this.$router.push({ path: 'track' })
+        this.$router.push({ path: 'appTrackBackup' })
     }
 }
 </script>
