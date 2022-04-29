@@ -26,7 +26,7 @@ export default {
             ignore: false,
             lat: 39.042598,
             lng: 115.852789,
-            orderId: 1519718226715451392,
+            orderId: "1519718226715451392",
             sort: 0,
             tag: 0
           }, {
@@ -36,7 +36,7 @@ export default {
             ignore: false,
             lat: 39.042484,
             lng: 115.881245,
-            orderId: 1519718226715451392,
+            orderId: "1519718226715451392",
             sort: 1,
             tag: 1
           }, {
@@ -46,7 +46,7 @@ export default {
             ignore: false,
             lat: 39.056444,
             lng: 115.878588,
-            orderId: 1519718525257621504,
+            orderId: "1519718525257621504",
             sort: 2,
             tag: 0
           }, {
@@ -56,7 +56,7 @@ export default {
             ignore: false,
             lat: 39.056444,
             lng: 115.878588,
-            orderId: 1519719409391738880,
+            orderId: "1519719409391738880",
             sort: 3,
             tag: 0
           }, {
@@ -66,7 +66,7 @@ export default {
             ignore: false,
             lat: 39.029954,
             lng: 115.896956,
-            orderId: 1519718525257621504,
+            orderId: "1519718525257621504",
             sort: 4,
             tag: 1
           }, {
@@ -76,7 +76,7 @@ export default {
             ignore: false,
             lat: 39.029954,
             lng: 115.896956,
-            orderId: 1519719409391738880,
+            orderId: "1519719409391738880",
             sort: 5,
             tag: 1
           }]
@@ -98,7 +98,9 @@ export default {
         objTem.ignore=parse[i].ignore;
         objTem.orderId=parse[i].orderId;
         objTem.tag=parse[i].tag;
-        this.path[0].path.push(objTem);
+        if(!objTem.ignore){
+          this.path[0].path.push(objTem);
+        }
       }
      // console.log(JSON.stringify( this.path[0].path))
       console.log(JSON.stringify( this.path[0].path[0]))
@@ -158,8 +160,8 @@ export default {
                 //point
               //  return pathData.name ;
                 let pathElement = pathData.path[pointIndex];
-                let string =pathElement.tag===1?'上车点':'下车点';
-                let ignore =pathElement.ignore?'已上车':'已下车';
+                let string =pathElement.tag===0?'上车点':'下车点';
+                let ignore =pathElement.ignore?'已过站':'';
                return pathData.name  + pathElement.orderId+string+"当前"+ignore;
               }
               console.log(JSON.stringify(pathData.path[pathIndex]));
