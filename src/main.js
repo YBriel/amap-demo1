@@ -9,6 +9,7 @@ import appTrackBackup from './AppTrackBackup.vue';
 import appTrackStation from './AppTrackStation.vue';
 import goodList from "./components/GoodList.vue"
 import ok from "./AppOk"
+import menu from "./MenuParse"
 //import click from "./ClickEvent"
 import app3 from "./App3"
 import app2 from "./App2"
@@ -44,7 +45,8 @@ const router = new VueRouter({
     {path: '/app2', component: app2},
     {path: '/temp', component: temp},
     {path: '/backup', component: backup},
-    {path: '/mp4', component: mp4}
+    {path: '/mp4', component: mp4},
+    {path: '/menu', component: menu}
 
   ]
 
