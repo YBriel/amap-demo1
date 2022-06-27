@@ -15,6 +15,7 @@ export default {
       input: '',
       map: '', // 地图
       centerPoint: '115.842574,28.738859',
+      //"https://restapi.amap.com/v3/direction/driving?strategy=0&origin=" + origin + "&destination=" + dest + "&extensions=base&key=231ce73f17b3dd7acadcc40bc0965aaf&waypoints=" + wayPoints
       // 轨迹数组，格式[{},{},...]
       path: [
         {

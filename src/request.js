@@ -13,7 +13,7 @@ axios.defaults.headers['Content-Type'] = 'multipart/form-data'
 const service = axios.create({
   // axios中请求配置有baseURL选项，表示请求URL公共部分
   //baseURL: 'http://192.168.1.2:8090',
-  baseURL: 'https://www.bonaxl.com:8090',
+ // baseURL: 'https://www.bonaxl.com:8090',
   // 超时
   timeout: 60000
 })
@@ -33,6 +33,9 @@ service.interceptors.response.use(res => {
 
     if (code==0){
         return res.data
+    }
+    if(res.status===200){
+        return res.data;
     }
     if (res.data.status == '1'){
       return res.data.route

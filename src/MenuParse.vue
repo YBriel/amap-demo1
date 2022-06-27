@@ -61,11 +61,12 @@ export default {
       //
       // }
       // console.log(data)
+      //115.890075,39.034385;115.881245,39.042484;115.886188,39.042536;115.95226,39.047772;
       const  data = new FormData()
       const fileobj = {uri: file.path, type: 'multipart/form-data', name: 'file.xls'}
       data.append('file', file.raw)
       request({url: '/api/nftplatform/menu/menuParse', method: 'POST' , data:data }).then((rep)=>{
-        this.result=rep.data.result;
+        this.result=rep.data.route[0];
         console.log(rep)})
 
     }
