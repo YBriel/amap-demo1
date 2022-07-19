@@ -130,7 +130,7 @@ export default {
       })
     },
     async getRoutes(origin,dest,waypoints) {
-    let rep= await request({url: 'https://restapi.amap.com/v3/direction/driving?strategy=0&origin=' +origin+ "&destination=" + dest + "&extensions=base&key=231ce73f17b3dd7acadcc40bc0965aaf&waypoints=" + waypoints, method: 'GET'})
+    let rep= await request({url: 'https://restapi.amap.com/v3/direction/driving?strategy=10&origin=' +origin+ "&destination=" + dest + "&extensions=base&key=231ce73f17b3dd7acadcc40bc0965aaf&waypoints=" + waypoints, method: 'GET'})
       let path = rep.route.paths[0].steps;
       let points="";
       for (let i = 0; i < path.length; i++) {
@@ -139,7 +139,7 @@ export default {
       return points;
     },
     getRoutes2(origin,dest,waypoints) {
-      request({url: 'https://restapi.amap.com/v3/direction/driving?strategy=0&origin=' +origin+ "&destination=" + dest + "&extensions=base&key=231ce73f17b3dd7acadcc40bc0965aaf&waypoints=" + waypoints, method: 'GET'}).then((rep) => {
+      request({url: 'https://restapi.amap.com/v3/direction/driving?strategy=10&origin=' +origin+ "&destination=" + dest + "&extensions=base&key=231ce73f17b3dd7acadcc40bc0965aaf&waypoints=" + waypoints, method: 'GET'}).then((rep) => {
         let path = rep.route.paths[0].steps;
         let points="";
         for (let i = 0; i < path.length; i++) {
